@@ -1,0 +1,27 @@
+import java.util.Scanner;
+class p14
+{
+    public static void main(String[] args)
+    {
+        Scanner sc=new Scanner(System.in)
+       
+        System.out.println("Enter a any string");
+        string inputStr=sc.nextLine();
+
+        System.out.println("Enter a any find character.");
+        string  charstr=sc.nextLine();
+
+
+        if(inputStr.length())
+        {
+            System.out.Println("Pleace enter atlist on echaracter....!");
+        }
+        
+
+        int count=0;
+        boolean false;
+
+
+        
+    }
+}

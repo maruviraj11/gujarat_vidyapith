@@ -1,0 +1,33 @@
+##   Table Locking Mechanism Demonstration  ##
+
+step 1:
+open shell1 and Create user1;
+mysql -u root -p
+
+step 2:
+choose database;
+use mca250160450052;
+
+step 3:
+open shell2 and Create use2;
+mysql -u root -p
+
+step 4:
+choose database;
+use mca250160450052;
+
+step 5:
+in shell1: 
+start transaction;
+update account set amount=amount+100 where acc_no=1;
+
+step 6:
+in shell2:
+start transaction;
+update account set amount=amount+100 where acc_no=1;
+
+
+--> Here you can see after update record in the first shell, in second shell user cannot update
+the record, because the user1 hasn't give commit yet.
+
+--> This condition is called Locking Mechanism.

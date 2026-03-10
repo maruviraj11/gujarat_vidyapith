@@ -1,0 +1,53 @@
+1. Display the employee name, employee department name, boss name, and boss department name
+---------------------------------------------------------------------------------------------
+
+SELECT e.emp_name       AS employee_name,
+       d1.dept_name     AS employee_dept,
+       b.emp_name       AS boss_name,
+       d2.dept_name     AS boss_dept
+FROM employee e
+JOIN department d1 ON e.emp_dept_id = d1.dept_id
+LEFT JOIN employee b ON e.emp_boss_id = b.emp_id
+LEFT JOIN department d2 ON b.emp_dept_id = d2.dept_id;
+
+--------------------------------------------------------------------------------------------
+
+output:
+
+
+employee_name   employee_dept          boss_name   boss_dept
+------------------------------------------------------------
+viraj           IT department          NULL        NULL
+jay             IT department          viraj       IT department
+vansh           IT department          viraj       IT department
+ravi            product department     NULL        NULL
+veer            product department     ravi        product department
+pushpak         product department     ravi        product department
+jayveer         Management department  NULL        NULL
+raj             Management department  jayveer     Management department
+meet            Management department  jayveer     Management department
+meet dani       Management department  jayveer     Management department
+
+
+2.	Display the same information as above (employee name, department name, boss name, boss department name) but only for employees whose salary is greater than their boss’s salary.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SELECT e.emp_name       AS employee_name,
+       d1.dept_name     AS employee_dept,
+       b.emp_name       AS boss_name,
+       d2.dept_name     AS boss_dept,
+       e.emp_salary     AS employee_salary,
+       b.emp_salary     AS boss_salary
+FROM employee e
+JOIN department d1 ON e.emp_dept_id = d1.dept_id
+JOIN employee b ON e.emp_boss_id = b.emp_id
+JOIN department d2 ON b.emp_dept_id = d2.dept_id
+WHERE e.emp_salary > b.emp_salary;
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+output:
+employee_name   employee_dept           boss_name   boss_dept             employee_salary   boss_salary
+--------------------------------------------------------------------------------------------------------
+meet dani       Management department   jayveer     Management department  3000000           1000000

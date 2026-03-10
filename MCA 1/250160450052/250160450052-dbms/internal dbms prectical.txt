@@ -1,0 +1,100 @@
+	**.Create a database
+	----------------------------------------------------------
+	CREATE DATABASE mca0052;
+
+	
+	
+  1.Craete all table...
+----------------------------------------------------------------------
+	1.Create a s table
+
+	-----------------------------------------------------------
+	
+	create table s(sno char(3) primary key,sname varchar(50),s_status int(5),s_city varchar(25));
+
+	
+	2.Create a p table 
+	------------------------------------------------------------
+
+	create table p(pno char(3) primary key,pname varchar(20),color varchar(10),weight float(5,2),p_city varchar(25));
+
+	
+
+	3.Create a sp table
+	------------------------------------------------------------
+
+	create table sp(sno char(3),pno char(3),qty int(5),primary key(sno,pno),foreign key(sno)refences s(sno),foreign key(pno) refences p(pno));
+
+
+   2.Insert all table data 
+   ------------------------------------------------------------------------------------
+
+	1.Insert a s table recored
+	------------------------------------------------------------
+	insert into s(sno,sname,s_status,s_city)values(101,"viraj",s1,"Bhavnagar");
+	insert into s(sno,sname,s_status,s_city)values(102,"jay",1,"Ahemdabad");	
+	insert into s(sno,sname,s_status,s_city)values(103,"mitesh",1,"Ahemdabad");	
+	insert into s(sno,sname,s_status,s_city)values(104,"parthraj",1,"Jamnagar");	
+	insert into s(sno,sname,s_status,s_city)values(105,"jayraj",1,"Surat");	
+	insert into s(sno,sname,s_status,s_city)values(106,"deep",3,"rajkot");
+
+	
+	2.Insert a p table recored
+	-----------------------------------------------------------
+	
+	INSERT INTO P VALUES ('101','Nut','Red',12.0,'Ahemdabad');
+	INSERT INTO P VALUES ('102','Bolet','Green',17.0,'Bhavnagar');
+	INSERT INTO P VALUES ('103','Screw','Blue',17.0,'Ahemdabad');
+	INSERT INTO P VALUES ('104','Screw','White',14.0,'Jamnagar');
+	INSERT INTO P VALUES ('105','Cam','Blue',12.0,'Surat');
+	INSERT INTO P VALUES ('106','Bolet','White',12.0,'Ahemdabad');
+
+	
+	3.Insert a sp table recored
+	-------------------------------------------------------------------
+	insert into sp values('101','102',200);
+	insert into sp values('102','103',400);
+	insert into sp values('103','104',500);
+	insert into sp values('104','105',100);
+	insert into sp values('105','101',200);
+
+
+   3.Write a SQl statment for following (ANY THREE)
+   -------------------------------------------------------------------------
+
+	1.show all parts located at Ahemdabad city
+	----------------------------------------------------------------
+	select pname from p where p_city='Ahemdabad'
+
+
+
+	3.Show all suppler name and qty for parts name which are located in same city
+	-----------------------------------------------------------------
+
+		SELECT s.sname, p.pname, s.s_city
+		FROM s s
+		JOIN p p ON s.s_city = p.p_city;
+
+	
+
+	5.Show Secound highest weight of parts name..
+	---------------------------------------------------------------------
+
+	 SELECT pname, weight
+	     FROM P
+	    WHERE weight = (
+  	    SELECT MAX(weight)
+    	    FROM P
+   	    WHERE weight < (
+     	    SELECT MAX(weight) FROM P ));
+
+
+
+
+
+
+
+
+
+
+	

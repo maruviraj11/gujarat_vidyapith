@@ -1,0 +1,58 @@
+{% extends "accounts/dashboard_base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-card">
+    <h3><i class="fas fa-chart-line"></i> Welcome, {{ request.user.first_name|default:request.user.username }}!</h3>
+    <p>You are logged in as <strong>{{ user_role }}</strong>.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="stat-box">
+            <h4>Account Status</h4>
+            <p>Active</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="stat-box">
+            <h4>Your Role</h4>
+            <p>{{ user_role }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="dashboard-card">
+    <h3><i class="fas fa-user-circle"></i> Account Information</h3>
+    <table class="table table-sm">
+        <tr>
+            <td><strong>Username:</strong></td>
+            <td>{{ request.user.username }}</td>
+        </tr>
+        <tr>
+            <td><strong>Email:</strong></td>
+            <td>{{ request.user.email }}</td>
+        </tr>
+        <tr>
+            <td><strong>Full Name:</strong></td>
+            <td>{{ request.user.first_name }} {{ request.user.last_name }}</td>
+        </tr>
+        <tr>
+            <td><strong>Member Since:</strong></td>
+            <td>{{ request.user.date_joined|date:"M d, Y" }}</td>
+        </tr>
+        <tr>
+            <td><strong>Last Login:</strong></td>
+            <td>{{ request.user.last_login|default:"Never" }}</td>
+        </tr>
+    </table>
+</div>
+
+<div class="dashboard-card">
+    <h3><i class="fas fa-lock"></i> Security</h3>
+    <a href="{% url 'accounts:change_password' %}" class="btn btn-sm btn-primary">
+        <i class="fas fa-key"></i> Change Password
+    </a>
+</div>
+{% endblock %}

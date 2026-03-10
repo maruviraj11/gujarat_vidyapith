@@ -1,0 +1,54 @@
+1. Create Supplier Table(s).
+>> Create table s(sno char(3) primary key,sname varchar(50),s_status int,s_city varchar(25));
+
+2. Create Part Table(p).
+>> Create table p(pno char(3) primary key,pname varchar(20),color varchar(10),weight float(5,2) , p_city varchar(25));
+
+3. Create Shipment table(sp).
+>> Create table sp(sno char(3) , pno char(3) , qty int , primary(sno,pno));
+
+4. insert Record in s table(Supplier).
+>> insert into s(sno, sname, s_status, s_city) Values
+   ('S01', 'Aryan', 10, 'Surat'),
+   ('S02', 'Aakash', 20, 'Bengaluru'),
+   ('S03', 'Saurav', 30, 'Bombay'),
+   ('S04', 'Kushagra', 10, 'Delhi'),
+   ('S05', 'Ashish', 30, 'Hariyana');
+
+5. insert Record in p table(Part).
+>> insert into p(pno,pname,color,weight,p_city) Values
+   ('P1', 'Bolt', 'Silver', 0.5, 'Surat'),
+   ('P2', 'Nut', 'Black', 0.3, 'Mumbai'),
+   ('P3', 'Screw', 'Black', 0.2, 'Bengaluru'),
+   ('P4', 'Spring', 'Silver', 0.3, 'Delhi'),
+   ('P5', 'Gear', 'Red', 2.5, 'Hariyana');
+   
+6. insert record in sp table corresponding to s and p table.
+>> insert into sp(sno,pno,qty) Values
+   ('S03','P3',13),
+   ('S02','P5',1),
+   ('S04','P1',20),
+   ('S01','P2',12),
+   ('S05','P4',19);
+   
+7. use the UPDATE statement to modify one or more values in each table.
+
+- s table(Supplier):
+>> update s set sname='Abhimanyu' where sname='Aryan';
+   update s set s_status=20 where sno='S03';
+	
+- p table(Part):
+>> update p set color='Red' where color='Gray';
+   update p set p_city='London' where pno='P1';
+
+-sp table(Shipment):
+>> update sp set qty=2 where pno='P5';
+   update sp set sno='S02' where sno='S01';
+   
+8. use DELETE statement to remove:
+
+-  1 record from the s(Supplier) table.
+>> delete from s where s_status=10;
+   
+-  1 record from the p(Parts) table.
+>> delete from p where pno='P5';  

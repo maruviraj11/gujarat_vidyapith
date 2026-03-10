@@ -1,0 +1,40 @@
+##   Table Locking Mechanism Demonstration  ##
+
+step 1:
+open shell1 and Create user1;
+mysql -u root -p
+
+step 2:
+choose database;
+use mca250160450052;
+
+step 3:
+open shell2 and Create use2;
+mysql -u root -p
+
+step 4:
+choose database;
+use mca250160450052;
+
+step 5:
+in shell1: 
+start transaction;
+update account set amount=amount+100 where acc_no=1;
+
+step 6:
+in shell2:
+start transaction;
+update account set amount=amount+100 where acc_no=2;
+
+--> Till now both users are putting lock on different rows.
+
+step 7:
+user1 try to put lock on the second row.
+update account set amount=amount+100 where acc_no=2;
+
+step 8:
+user2 try to put lock on the first row.
+update account set amount=amount+100 where acc_no=1;
+
+--> From here both the users are waiting to unlock each others row to update while staying in wait state.
+no one is commit the process so the situation created here is a deadlock.

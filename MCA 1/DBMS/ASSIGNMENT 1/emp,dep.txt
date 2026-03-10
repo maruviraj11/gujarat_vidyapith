@@ -1,0 +1,55 @@
+ 
+1.create employee table
+------------------------------------------------------------------
+
+create table employee(emp_id int primary key,
+emp_name varchar(35) ,
+emp_dept_id int ,
+emp_boss_id int,
+emp_salary bigint,
+foreign key(emp_dept_id) references department(dept_id),
+foreign key(emp_boss_id) references employee(emp_id));
+
+
+
+2.create department table
+--------------------------------------------------------------------
+
+create table department(dept_id int primary key ,
+dept_name varchar(30),
+dept_location varchar(50));
+
+
+3.insert recoreds in department table..
+-----------------------------------------------------------------------
+insert into department(dept_id,dept_name,dept_location)values(1,"IT department","Ahemdabad");
+
+insert into department(dept_id,dept_name,dept_location)values(2,"product department","Bhavnagar");
+
+insert into department(dept_id,dept_name,dept_location)values(3,"Management  department","Baroda");
+
+
+4.insert recoreds in employee per department atlist 3 reacords in a table....
+-------------------------------------------------------------------------------------------------
+
+insert into employee(emp_id,emp_name,emp_dept_id,emp_boss_id,emp_salary)values(101,"viraj",1,null,1000000);
+insert into employee(emp_id,emp_name,emp_dept_id,emp_boss_id,emp_salary)values(102,"jay",1,101,50000);
+insert into employee(emp_id,emp_name,emp_dept_id,emp_boss_id,emp_salary)values(103,"vansh",1,101,80000);
+insert into employee(emp_id,emp_name,emp_dept_id,emp_boss_id,emp_salary)values(201,"ravi",2,null,40000);
+insert into employee(emp_id,emp_name,emp_dept_id,emp_boss_id,emp_salary)values(202,"veer",2,201,20000);
+insert into employee(emp_id,emp_name,emp_dept_id,emp_boss_id,emp_salary)values(203,"pushpak",2,201,10000);
+insert into employee(emp_id,emp_name,emp_dept_id,emp_boss_id,emp_salary)values(301,"jayveer",3,null,1000000);
+insert into employee(emp_id,emp_name,emp_dept_id,emp_boss_id,emp_salary)values(302,"raj",3,301,20000);
+insert into employee(emp_id,emp_name,emp_dept_id,emp_boss_id,emp_salary)values(303,"meet",3,301,30000);
+insert into employee(emp_id,emp_name,emp_dept_id,emp_boss_id,emp_salary)values(304,"meet dani",3,301,3000000);
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 

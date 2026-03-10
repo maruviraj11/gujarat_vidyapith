@@ -1,0 +1,17 @@
+3. Show each department’s name and the maximum salary in that department.
+>> select d.dept_name as Department_Name,max(e.emp_salary) "Max_Salary" from dept d join emp e on d.Dept_Id=e.Emp_Dept_Id group by d.Dept_Id;
+
+	Department_Name          Max_Salary
+	It			 85000
+	Marketing		 90000
+	Customer Care		 75000	
+
+ 
+4. Display each department name and the total number of employees working in 
+that department.
+>> select d.dept_name as Department_Name,count(e.emp_name) "No. of Employee" from emp e join dept d on d.Dept_Id=e.Emp_Dept_Id WHERE e.Emp_boss_id IS NOT NULL group by d.Dept_Id;
+
+	Department_Name           No. of Employee
+	It			 		3
+	Marketing		 		3
+	Customer Care		 		3

@@ -1,0 +1,12 @@
+--> CREATE TABLE :
+
+CREATE table B_account
+(
+    id int PRIMARY key,
+    balance float
+);
+
+--> INSERT DATA :
+
+INSERT INTO `b_account`(`id`, `balance`) VALUES (101,4000);
+INSERT INTO `b_account`(`id`, `balance`) VALUES (102,2000);

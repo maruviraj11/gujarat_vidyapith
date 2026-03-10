@@ -1,0 +1,36 @@
+1. Create table emp(Employee).
+>> create table emp 
+	(Emp_id int primary key, 
+	Emp_name varchar(35), 
+	Emp_Dept_Id int, 
+	Emp_boss_id int, 
+	Emp_salary bigint, 
+	foreign key (Emp_Dept_Id) references dept(Dept_Id), 
+	foreign key (Emp_boss_id) references emp(Emp_Id));
+
+   
+2. Create table dept(Department).
+>> create table dept(Dept_Id int primary key, 
+   Dept_name varchar(30), 
+   Dept_location varchar(50));
+
+3. Insert 3 record in department table(Dept).
+>> insert into dept (Dept_Id,Dept_name,Dept_location) values
+   (1, 'IT', 'Pune'),
+   (2, 'Marketing','Bombay'),
+   (3,'Customer Care','Ahmedabad');
+
+4. Insert atleast 3 record per department in Emp table(Employee).
+>> insert into emp (Emp_Id,Emp_name,Emp_Dept_id,Emp_boss_id,Emp_salary) values 
+   (101,'Ashish',1,NULL,78000),  
+   (102,'Pratyush',1,101,56000),
+   (103,'Anubhav',1,101,60000),
+   (104,'Kaustubh',1,101,85000),
+   (201,'Kushal',2,NULL,80000),
+   (202,'Devashree',2,201,51000),
+   (203,'Shalini',2,201,57000),
+   (204,'Jay',2,201,90000),
+   (301,'Kaushal',3,NULL,70000),
+   (302,'Virat',3,301,45000),
+   (303,'Siraj',3,301,56000),
+   (304,'Shubman',3,301,75000);

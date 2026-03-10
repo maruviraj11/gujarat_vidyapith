@@ -1,0 +1,42 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "CalcMatrix",
+            "request": "launch",
+            "mainClass": "CalcMatrix",
+            "projectName": "JAVA_3dfb7ba9"
+        },
+        {
+            "type": "java",
+            "name": "checkPrime",
+            "request": "launch",
+            "mainClass": "checkPrime",
+            "projectName": "JAVA_3dfb7ba9"
+        },
+        {
+            "type": "java",
+            "name": "freq",
+            "request": "launch",
+            "mainClass": "freq",
+            "projectName": "JAVA_3dfb7ba9"
+        },
+        {
+            "type": "java",
+            "name": "minmax",
+            "request": "launch",
+            "mainClass": "minmax",
+            "projectName": "JAVA_3dfb7ba9"
+        }
+    ]
+}

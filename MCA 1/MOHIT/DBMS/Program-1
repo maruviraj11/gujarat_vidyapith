@@ -1,0 +1,21 @@
+1. Create database named mca250160450031.
+>> Create Database mca250160450031;
+
+2. Create Table Account.
+>> Create table account(acc_no int, amount decimal(10,2));
+
+3. insert Record in Account Table.
+>> INSERT INTO account(acc_no,amount) 
+	VALUES(101,12500.45),(102,5000.50),
+	(103,4500.47),(104,1245.60),
+	(105,6600.45),(106,7000.20),
+	(107,3410.70),(108,15050.66),
+	(109,14300.90),(110,15000.00);
+
+4. Use the UPDATE statement to change the amount of one or more records.
+>> UPDATE account SET amount = 4100.50 where acc_no in(102,104);
+
+5. Use the DELETE statement to remove any two records from the table.
+>> DELETE FROM account where acc_no in(109,110);
+
+	

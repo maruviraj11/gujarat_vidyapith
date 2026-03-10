@@ -1,0 +1,62 @@
+==> account1 Table:
+
+CREATE TABLE account1 (
+    acc_no INT,
+    amount DECIMAL(10,2)
+);
+
+
+
+==> account_Summary1 Table:
+
+CREATE TABLE account_summary1 (
+    acc_no INT PRIMARY KEY,
+    total_credit DECIMAL(12,2) DEFAULT 0.00,
+    total_debit DECIMAL(12,2) DEFAULT 0.00
+);
+
+
+==> Create Trigger While insert record:
+
+DELIMITER $$
+
+CREATE TRIGGER update_summary_trigger
+AFTER INSERT
+ON account1
+FOR EACH ROW
+BEGIN
+   
+    IF EXISTS (SELECT 1 FROM account_summary1 WHERE acc_no = NEW.acc_no) THEN
+    
+        
+        IF NEW.amount > 0 THEN
+            UPDATE account_summary1
+            SET total_credit = total_credit + NEW.amount
+            WHERE acc_no = NEW.acc_no;
+        
+        
+        ELSEIF NEW.amount < 0 THEN
+            UPDATE account_summary1
+            SET total_debit = total_debit + ABS(NEW.amount)
+            WHERE acc_no = NEW.acc_no;
+        END IF;
+    
+    ELSE
+       
+        IF NEW.amount > 0 THEN
+            INSERT INTO account_summary1 (acc_no, total_credit, total_debit)
+            VALUES (NEW.acc_no, NEW.amount, 0.00);
+        ELSE
+            INSERT INTO account_summary1 (acc_no, total_credit, total_debit)
+            VALUES (NEW.acc_no, 0.00, ABS(NEW.amount));
+        END IF;
+    END IF;
+END$$
+
+DELIMITER ;
+
+INSERT INTO account1 VALUES (101, 500.00);   
+INSERT INTO account1 VALUES (101, -200.00);  
+INSERT INTO account1 VALUES (102, 1000.00); 
+INSERT INTO account1 VALUES (102, -300.00);  
+INSERT INTO account1 VALUES (101, 250.00);

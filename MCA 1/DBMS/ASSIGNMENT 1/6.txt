@@ -1,0 +1,55 @@
+11.Show total quantity supplied for each part name.
+--------------------------------------------------------
+
+select P.pname , sum(SP.qty) 
+	from p P ,sp SP 
+		where P.pnum
+        = SP.pnum group by P.pname;
+
+
+output:
+------------------------------------------------------------
+pname      total_quantity
+-------------------------
+Bolt       1000
+Cam        500
+Cog        100
+Nut        600
+Screw      900
+
+
+12.For each supplier whose supplier number is less than 's4', show total quantity supplied by that supplier
+----------------------------------------------------------------------------------------------------------------------------
+select S.sname , sum(SP.qty) 
+	from s S , sp SP 
+		where S.snum = SP.sum and S.snum < 's4' group by S.sname;
+
+
+output:
+---------------------------------------------------------------------------------------
+
+sname     total_quantity
+-------------------------
+Blake     200
+Clark     900
+Jones     700
+Smith     1300
+
+
+
+13.For each supplier with a supplier status of 20, show the total quantity supplied by them
+------------------------------------------------------------------------------------------------
+
+select S.sname , sum(SP.qty) 
+	from s S,sp SP 
+		where S.snum = SP.snum and s_status = 20 group by S.sname;
+
+
+output:
+------------------------------------------------------------------------
+
+sname     total_quantity
+-------------------------
+Clark     900
+Smith     1300
+

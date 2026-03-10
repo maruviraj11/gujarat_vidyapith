@@ -1,0 +1,59 @@
+--< TRIGGER >--
+
+--> 1. Create Table Account10
+
+CREATE TABLE account_10
+(
+    acc_no INT,
+    amount DECIMAL(10, 2) NOT NULL
+);
+
+--> 2. Account Summary CD
+
+CREATE TABLE account_summary_cd
+(
+    acc_no INT,
+    total_credit DECIMAL(10, 2) DEFAULT 0.00,
+    total_debit DECIMAL(10, 2) DEFAULT 0.00,
+    total_amount DECIMAL(15, 2) NOT NULL	
+);
+
+--> 3. Create Trigger
+
+DELIMITER $$
+
+CREATE TRIGGER trg_after_insert_account
+AFTER INSERT ON account_10
+FOR EACH ROW
+BEGIN
+    IF EXISTS (SELECT 1 FROM account_summary_cd WHERE acc_no = NEW.acc_no) THEN
+        IF NEW.amount > 0 THEN
+            UPDATE account_summary_cd
+            SET total_credit = total_credit + NEW.amount,
+                total_amount = total_amount + NEW.amount
+            WHERE acc_no = NEW.acc_no;
+        ELSE
+            UPDATE account_summary_cd
+            SET total_debit = total_debit + ABS(NEW.amount),
+                total_amount = total_amount - ABS(NEW.amount)
+            WHERE acc_no = NEW.acc_no;
+        END IF;
+    ELSE
+        IF NEW.amount > 0 THEN
+            INSERT INTO account_summary_cd (acc_no, total_credit, total_debit, total_amount)
+            VALUES (NEW.acc_no, NEW.amount, 0, NEW.amount);
+        ELSE
+            INSERT INTO account_summary_cd (acc_no, total_credit, total_debit, total_amount)
+            VALUES (NEW.acc_no, 0, ABS(NEW.amount), -ABS(NEW.amount));
+        END IF;
+    END IF;
+END$$
+
+DELIMITER ;
+
+--> 4. Insert data in account_10 table
+
+INSERT INTO `account_10`(`acc_no`, `amount`) VALUES (23456789,5000);
+
+
+

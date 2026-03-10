@@ -1,0 +1,83 @@
+6. Show supplier number and quantity for the part(s) with the highest weight.
+---------------------------------------------------------------------------------------------------------
+
+> select a.snum, a.qty 
+	from  sp a , p b 
+		where a.pnum = b.pnum and b.weight = (select max(weight) from p);
+
+**Result:
+
+	snum   qty
+	p6	100
+
+
+7. Show supplier name and quantity for parts with color “Red”.
+
+> select s.sname, sp.qty,p.color 
+	from s s, p p , sp sp 
+		where s.snum = sp.snum and sp.pnum = p.pnum and p.color = 'Red';
+
+**Result:
+
+sname    qty	color
+------------------------
+Smith    300	red
+Smith    200	red
+Smith    100	red
+Jones    300	red	
+Clark    300	red
+
+
+
+8. Display supplier name, part city, and quantity where the supplier’s status is less than 30 (from the shipments).
+
+> select S.sname , P.p_city , SP.qty from s S ,p P,sp SP where S.snum = SP.snum and P.pnum = SP.pnum and S.s_status < 30;
+
+**Result:
+
+sname    p_city   qty
+--------------------------
+Smith    London   300
+Smith    Paris    200
+Smith    Oslo     400
+Smith    London   200
+Smith    Paris    100
+Smith    London   100
+Jones    London   300
+Jones    Paris    400
+Clark    Paris    200
+Clark    London   300
+Clark    Paris    400
+
+
+
+9. Display total quantity supplied by each supplier.
+
+> select S.sname , sum(SP.qty) from s S, sp SP where S.snum = SP.snum group by S.sname;
+
+**Result:
+
+sname    total_qty
+Blake    200
+Clark    900
+Jones    700
+Smith    1300
+
+
+
+10.Display total quantity supplied for each part.
+
+> select P.pnum , sum(SP.qty) 
+	from p P ,sp SP 
+		where P.pnum = SP.pnum group by P.pnum;
+
+**Result:
+
+num    sum(SP.qty)
+-------------------
+1      600
+2      1000
+3      400
+4      500
+5      500
+6      100

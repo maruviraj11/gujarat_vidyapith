@@ -1,0 +1,121 @@
+{% extends "accounts/dashboard_base.html" %}
+
+{% block title %}{{ object.username }} - User Details{% endblock %}
+
+{% block content %}
+<div class="dashboard-card">
+    <h3><i class="fas fa-user"></i> User Details</h3>
+
+    <table class="table table-sm">
+        <tr>
+            <td><strong>Username:</strong></td>
+            <td>{{ object.username }}</td>
+        </tr>
+        <tr>
+            <td><strong>Email:</strong></td>
+            <td>{{ object.email }}</td>
+        </tr>
+        <tr>
+            <td><strong>Full Name:</strong></td>
+            <td>{{ object.first_name }} {{ object.last_name }}</td>
+        </tr>
+        <tr>
+            <td><strong>Role:</strong></td>
+            <td>
+                {% if object.profile.role %}
+                <span class="badge bg-info">{{ object.profile.role.get_name_display }}</span>
+                {% else %}
+                <span class="badge bg-secondary">No Role</span>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Active:</strong></td>
+            <td>
+                {% if object.is_active %}
+                <span class="badge bg-success">Yes</span>
+                {% else %}
+                <span class="badge bg-danger">No</span>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Email Verified:</strong></td>
+            <td>
+                {% if object.profile.is_verified %}
+                <span class="badge bg-success">Yes</span>
+                {% else %}
+                <span class="badge bg-warning">No</span>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Account Locked:</strong></td>
+            <td>
+                {% if object.profile.is_locked %}
+                <span class="badge bg-danger">Yes</span>
+                <br><small>Locked until: {{ object.profile.locked_until }}</small>
+                {% else %}
+                <span class="badge bg-success">No</span>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Login Attempts:</strong></td>
+            <td>{{ object.profile.login_attempts }}</td>
+        </tr>
+        <tr>
+            <td><strong>Last Login IP:</strong></td>
+            <td>{{ object.profile.last_login_ip|default:"Never logged in" }}</td>
+        </tr>
+        <tr>
+            <td><strong>Member Since:</strong></td>
+            <td>{{ object.profile.created_at|date:"M d, Y H:i" }}</td>
+        </tr>
+    </table>
+</div>
+
+<div class="dashboard-card">
+    <h3><i class="fas fa-lock"></i> Account Management</h3>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h5>Update Role</h5>
+            <form method="post" action="{% url 'accounts:update_user_role' object.pk %}">
+                {% csrf_token %}
+                <div class="input-group">
+                    <select name="role_id" class="form-select" required>
+                        <option value="">Select a role</option>
+                        {% for role in object.profile.user.groups.all %}
+                        <option value="{{ role.id }}">{{ role.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-6">
+            <h5>Lock/Unlock Account</h5>
+            <form method="post" action="{% url 'accounts:lock_unlock_user' object.pk %}">
+                {% csrf_token %}
+                {% if object.profile.is_locked %}
+                <button type="submit" name="action" value="unlock" class="btn btn-success">
+                    <i class="fas fa-unlock"></i> Unlock Account
+                </button>
+                {% else %}
+                <button type="submit" name="action" value="lock" class="btn btn-warning">
+                    <i class="fas fa-lock"></i> Lock Account
+                </button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="dashboard-card">
+    <a href="{% url 'accounts:user_management' %}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Back to Users
+    </a>
+</div>
+{% endblock %}

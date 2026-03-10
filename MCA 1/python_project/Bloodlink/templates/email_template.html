@@ -1,0 +1,14 @@
+<html>
+<body style="font-family: Arial; background-color:#fff5f5; padding:20px;">
+  <h2 style="color:#d9534f;">Blood Donation Reminder</h2>
+  <p>Dear {{ name }},</p>
+  <p>You are now eligible to donate blood again. Here’s a nearby camp:</p>
+  <ul>
+    <li><b>{{ camp_name }}</b></li>
+    <li>{{ camp_address }}</li>
+    <li>Date: {{ camp_date }}</li>
+  </ul>
+  <a href="{{ maps_link }}" style="color:white; background:#d9534f; padding:10px 15px; text-decoration:none; border-radius:5px;">View on Google Maps</a>
+  <p style="margin-top:20px;">Thank you for being a hero ❤️</p>
+</body>
+</html>

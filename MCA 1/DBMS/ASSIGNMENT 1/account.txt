@@ -1,0 +1,61 @@
+Q1.....Create a database with the name MCA or MScIT, followed by your student number (e.g., MCA230456789 or MScIT230456789). Inside this database, create a table named account with the following fields: acc_no (Integer)
+amount (Decimal – up to 10 digits, with 2 decimal places) After creating the table:
+-------------------------------------------------------------------------------------
+1.DATABASE CRAETE 
+------------------------------------------------------------------
+
+Create database
+	 mca250160450052;
+
+
+1.CREATE A TABLE AND NAME OF THE TABLE IS ACCOUNT...
+--------------------------------------------------------------------------------
+
+create table account(acc_no int(10) primary key,
+					amount decimal(10,2));
+
+
+
+
+2.INSERT A DATA....IN ACCOUNT TABLE
+-----------------------------------------------------------------------------------
+
+1.INSERT into account VALUES(101,10000);
+
+2.INSERT into account VALUES(102,20000);
+
+3.INSERT into account VALUES(103,30000);
+
+4.INSERT into account VALUES(104,40000);
+
+5.INSERT into account VALUES(105,50000);
+
+6.INSERT into account VALUES(106,60000);
+
+7.INSERT into account VALUES(107,70000);
+
+8.INSERT into account VALUES(108,80000);
+
+9.INSERT into account VALUES(109,90000);
+
+
+
+
+3.UPDATE A TWO RECORDS..
+-----------------------------------------------------------------------------------
+
+
+1.update account set amount = 100000 where acc_no=109;
+
+
+2.update account set amount = 111111 where acc_no=101;
+
+
+
+4.DELETE A TWO RECORD........
+------------------------------------------------------------------------------------
+
+1.DELETE FROM ACCOUNT WHERE ACC_NO=102;
+
+2.DELETE FROM ACCOUNT WHERE ACC_NO=104;
+

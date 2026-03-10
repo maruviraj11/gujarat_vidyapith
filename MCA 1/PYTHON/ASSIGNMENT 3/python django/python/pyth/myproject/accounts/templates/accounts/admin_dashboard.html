@@ -1,0 +1,83 @@
+{% extends "accounts/dashboard_base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-card">
+    <h3><i class="fas fa-tachometer-alt"></i> Admin Dashboard</h3>
+    <p>Welcome to the administration panel.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="stat-box">
+            <h4>{{ total_users }}</h4>
+            <p>Total Users</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-box">
+            <h4>{{ active_users }}</h4>
+            <p>Active Users</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-box">
+            <h4>{{ locked_users }}</h4>
+            <p>Locked Accounts</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-box">
+            <h4>3</h4>
+            <p>User Roles</p>
+        </div>
+    </div>
+</div>
+
+<div class="dashboard-card">
+    <h3><i class="fas fa-history"></i> Recent Login Activity</h3>
+    <div class="table-responsive">
+        <table class="table table-sm table-hover">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Action</th>
+                    <th>IP Address</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log in recent_logins %}
+                <tr>
+                    <td>{{ log.user.username }}</td>
+                    <td><span class="badge bg-success">{{ log.action }}</span></td>
+                    <td>{{ log.ip_address }}</td>
+                    <td>{{ log.timestamp|timesince }} ago</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center text-muted">No recent login activity</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="dashboard-card">
+    <h3><i class="fas fa-link"></i> Quick Links</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <a href="{% url 'accounts:user_management' %}" class="btn btn-outline-primary w-100 mb-2">
+                <i class="fas fa-users"></i> Manage Users
+            </a>
+        </div>
+        <div class="col-md-6">
+            <a href="{% url 'accounts:audit_logs' %}" class="btn btn-outline-primary w-100 mb-2">
+                <i class="fas fa-history"></i> View Audit Logs
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

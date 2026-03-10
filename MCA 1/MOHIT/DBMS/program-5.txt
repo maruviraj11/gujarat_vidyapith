@@ -1,0 +1,67 @@
+6. show supplier number and quantity for the part(s) with the highest weight.
+>> select Sp.sno,Sp.qty 
+	from sp Sp,p P 
+		where P.weight=(select max(weight) from p) 
+			and Sp.pno=P.pno;
+			
+			
+	sno   qty
+	
+	S02	  232
+
+7. Show supplier name and quantity for parts with color "Red".
+>> select S.sname,Sp.qty,P.color 
+	from s S,sp Sp,p P 
+		where P.color='Red' 
+			and Sp.sno=S.sno 
+				and Sp.pno=P.pno;
+				
+				
+	sname   qty   color
+	
+	Ashish  180   Red
+
+8. Display supplier name,part city,and quantity where the supplier's status is less than 30 (from the shipment).
+>> select S.sname,S.s_status,P.p_city,Sp.qty 
+	from s S,sp Sp,p P 
+		where S.s_status<30 
+			and Sp.sno=S.sno 
+				and Sp.pno=P.pno;
+				
+				
+	sname     s_status   p_city   qty
+	
+	Abhimanyu       10   Mumbai   242
+	Aakash          20   Hariyana 232
+	Saurav          20   London   243
+	Kushagra        10   Surat    130
+
+9. Display total quantity supplied by each supplier.
+>> select S.sname,sum(Sp.qty)"Total Quantity" 
+	from sp Sp,s S 
+		where Sp.sno=S.sno 
+			group by S.sno;
+			
+			
+	sname      Total Quantity
+	
+	Abhimanyu             242
+	Aakash                232
+	Saurav                243
+	Kushagra              130
+	Ashish                180
+
+10. Display total quantity supplied for each part.
+>> select P.pname,sum(Sp.qty)"Total Quantity" 
+	from sp Sp,p P 
+		where Sp.pno=P.pno 
+			group by P.pname;
+			
+			
+	pname      Total Quantity
+	
+	Bolt	   130
+	Gear       232
+	Nut        242
+	Screw      243
+	Spring     180

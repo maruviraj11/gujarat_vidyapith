@@ -1,0 +1,43 @@
+1. Display all parts that are located in the city 'London'.
+>> select * from p where p_city='London';
+
+
+	pno   pname   color   weight   p_city
+	
+	P3    Screw   Black     0.20   London
+
+2. Show the part name of the part with the maximum weight.
+>> select pname,max(weight)"Max Weight" from p;
+	
+	
+	pname   Max Weight
+	
+	Bolt		  2.50
+
+3. List all the part names and part numbers for parts where the color is "Red".
+>> select pno,pname,color from p where color='Red';
+
+
+	pno   pname   color
+	
+	P4    Spring  Red
+
+4. Display supplier name and supplier city for those suppliers who have supplied any part in quantity more than 200.
+>> select s.sname,s.s_city,Sp.qty from s S,sp Sp where Sp.qty>200 and s.sno=Sp.sno;
+
+
+	sname      s_city    qty
+	
+	Abhimanyu  Surat     242
+	Aakash     Bengaluru 232
+	Saurav     Bombay	 243
+
+	
+
+5. Find and display the second highest weight of all parts.
+>> select pname,max(weight)"Weight" from p where weight<(select max(weight) from p);
+
+
+	pname   Weight
+	
+	Bolt      0.40
