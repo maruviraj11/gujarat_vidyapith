@@ -39,10 +39,11 @@ public class registerservlet extends HttpServlet {
 
             if (i > 0) {
                 out.println("<h3>Registration Successful!</h3>");
+               
             } else {
                 out.println("<h3>Registration Failed!</h3>");
             }
-
+             //out.println("<a href="index.jsp">BACK</a>");
             con.close();
 
         } catch (Exception e) {
